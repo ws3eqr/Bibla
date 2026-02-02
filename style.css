@@ -1,0 +1,163 @@
+:root {
+    /* Дефолтная тема (Midnight Blue) */
+    --bg: #0f172a;
+    --panel: rgba(30, 41, 59, 0.7);
+    --text: #f1f5f9;
+    --text-sec: #94a3b8;
+    --accent: #38bdf8;
+    --glow: rgba(56, 189, 248, 0.4);
+    --radius: 24px;
+    --font: 'Manrope', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font); transition: background 0.5s, color 0.5s; }
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Фон анимации */
+#ambient-canvas {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Навигация */
+.glass-nav {
+    position: sticky;
+    top: 20px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--panel);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 50px;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
+}
+
+.logo { font-weight: 700; font-size: 1.2rem; cursor: pointer; letter-spacing: -0.5px; }
+.glow-text { color: var(--accent); text-shadow: 0 0 15px var(--glow); }
+
+.nav-btn {
+    background: none; border: none; color: var(--text-sec);
+    margin-left: 20px; cursor: pointer; font-size: 1rem;
+    transition: 0.3s;
+}
+.nav-btn.active, .nav-btn:hover { color: var(--text); text-shadow: 0 0 10px var(--glow); }
+
+/* Контейнер */
+.container { max-width: 900px; margin: 50px auto; padding: 0 20px 100px; }
+
+/* Стекло */
+.glass-panel {
+    background: var(--panel);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.2);
+}
+
+/* Био */
+.author-bio { text-align: center; padding: 50px 30px; }
+.gradient-title {
+    font-size: 3rem; font-weight: 800; margin-bottom: 15px;
+    background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.social-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.1); color: var(--text);
+    text-decoration: none; padding: 10px 20px; border-radius: 30px;
+    margin: 10px; transition: 0.3s;
+}
+.social-btn:hover { background: var(--accent); color: var(--bg); box-shadow: 0 0 20px var(--glow); }
+
+/* Сетка книг */
+.books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.book-card {
+    background: rgba(255,255,255,0.03); border-radius: 20px; padding: 20px;
+    cursor: pointer; transition: 0.3s; border: 1px solid transparent;
+    position: relative; overflow: hidden;
+}
+.book-card:hover {
+    transform: translateY(-5px); border-color: var(--accent);
+    box-shadow: 0 10px 30px -10px var(--glow);
+}
+.book-badge {
+    position: absolute; top: 15px; right: 15px;
+    background: var(--accent); color: var(--bg);
+    font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;
+}
+.book-title { font-size: 1.2rem; margin-bottom: 5px; font-weight: 700; }
+.book-author { color: var(--text-sec); font-size: 0.9rem; margin-bottom: 15px; }
+.book-preview { font-size: 0.85rem; color: var(--text-sec); line-height: 1.5; opacity: 0.7; }
+
+/* Читалка */
+.back-btn {
+    background: none; border: none; color: var(--accent);
+    cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; gap: 5px;
+    margin-bottom: 20px;
+}
+.text-body { font-size: 1.15rem; line-height: 1.8; white-space: pre-wrap; }
+.separator { height: 1px; background: rgba(255,255,255,0.1); margin: 20px 0; }
+
+/* Настройки */
+.options-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+.opt-btn {
+    background: rgba(255,255,255,0.05); border: 1px solid transparent;
+    color: var(--text); padding: 10px 20px; border-radius: 12px; cursor: pointer;
+}
+.opt-btn:hover { border-color: var(--accent); }
+
+/* Сетка тем */
+.themes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 10px; margin-top: 15px; }
+.theme-dot {
+    height: 50px; border-radius: 12px; cursor: pointer;
+    border: 2px solid transparent; transition: 0.2s;
+}
+.theme-dot:hover { transform: scale(1.1); }
+
+/* Часы */
+#floating-clock {
+    position: fixed; top: 100px; right: 30px;
+    width: 140px; padding: 15px; text-align: center;
+    z-index: 1000; cursor: grab; user-select: none;
+    display: flex; flex-direction: column; align-items: center;
+}
+#floating-clock:active { cursor: grabbing; }
+#clock-time { font-size: 2rem; font-weight: 700; color: var(--accent); text-shadow: 0 0 10px var(--glow); }
+.clock-handle { font-size: 1.2rem; color: var(--text-sec); margin-top: 5px; opacity: 0.5; }
+
+/* Переключатель */
+.switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255,255,255,0.1); transition: .4s; border-radius: 34px; }
+.slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--accent); }
+input:checked + .slider:before { transform: translateX(24px); }
+
+/* Утилиты */
+.hidden { display: none; }
+.fade-in { animation: fadeIn 0.5s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }

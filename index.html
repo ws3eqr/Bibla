@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ws3eqr | Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Иконки -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Фон для анимаций (Зима/Лето) -->
+    <div id="ambient-canvas"></div>
+
+    <!-- Плавающие часы (Draggable) -->
+    <div id="floating-clock" class="glass-panel hidden">
+        <span id="clock-time">00:00</span>
+        <div class="clock-handle"><i class="ri-drag-move-2-fill"></i></div>
+    </div>
+
+    <!-- Навигация -->
+    <nav class="glass-nav">
+        <div class="logo" onclick="switchTab('home')">ws3eqr.<span class="glow-text">lib</span></div>
+        <div class="nav-links">
+            <button class="nav-btn active" onclick="switchTab('home')" data-key="nav_home">Главная</button>
+            <button class="nav-btn" onclick="switchTab('settings')" data-key="nav_settings">Настройки</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <!-- Раздел: ГЛАВНАЯ -->
+        <section id="home-section" class="fade-in">
+            <!-- Био автора -->
+            <div class="author-bio glass-panel">
+                <div class="bio-content">
+                    <h1 class="gradient-title">ws3eqr</h1>
+                    <p data-key="bio_text">Создатель миров в коде. Здесь собраны истории, рожденные на стыке человеческого воображения и алгоритмов.</p>
+                    <div class="socials">
+                        <a href="https://t.me/ws3eqr" target="_blank" class="social-btn"><i class="ri-telegram-fill"></i> DM</a>
+                        <a href="https://t.me/print_ws3eqr" target="_blank" class="social-btn"><i class="ri-printer-cloud-fill"></i> Channel</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Сетка книг (генерируется JS) -->
+            <div class="books-grid" id="books-container">
+                <!-- Книги появятся здесь сами -->
+            </div>
+        </section>
+
+        <!-- Раздел: ЧИТАЛКА (Скрыт по умолчанию) -->
+        <section id="reader-section" class="hidden fade-in">
+            <button class="back-btn" onclick="closeReader()"><i class="ri-arrow-left-line"></i> <span data-key="btn_back">Назад</span></button>
+            <div class="book-content glass-panel">
+                <h1 id="reader-title">Название книги</h1>
+                <p id="reader-meta" class="meta-text">Автор • Жанр</p>
+                <div class="separator"></div>
+                <div id="reader-text" class="text-body">
+                    <!-- Текст книги -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Раздел: НАСТРОЙКИ -->
+        <section id="settings-section" class="hidden fade-in">
+            <h2 class="section-title" data-key="set_title">Персонализация</h2>
+            
+            <!-- Язык -->
+            <div class="setting-block glass-panel">
+                <h3 data-key="set_lang">Язык / Language</h3>
+                <div class="options-row">
+                    <button onclick="setLang('ru')" class="opt-btn">Русский</button>
+                    <button onclick="setLang('en')" class="opt-btn">English</button>
+                    <button onclick="setLang('jp')" class="opt-btn">日本語</button>
+                </div>
+            </div>
+
+            <!-- Атмосфера (Сезоны) -->
+            <div class="setting-block glass-panel">
+                <h3 data-key="set_season">Атмосфера</h3>
+                <div class="options-row">
+                    <button onclick="setSeason('none')" class="opt-btn">Очистить</button>
+                    <button onclick="setSeason('winter')" class="opt-btn"><i class="ri-snowy-line"></i></button>
+                    <button onclick="setSeason('sakura')" class="opt-btn"><i class="ri-flower-line"></i></button>
+                    <button onclick="setSeason('fireflies')" class="opt-btn"><i class="ri-fire-line"></i></button>
+                </div>
+            </div>
+
+            <!-- Часы -->
+            <div class="setting-block glass-panel">
+                <h3 data-key="set_clock">Инструменты</h3>
+                <div class="toggle-row">
+                    <span data-key="clock_label">Плавающие часы</span>
+                    <label class="switch">
+                        <input type="checkbox" id="clock-toggle" onchange="toggleClock()">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 20 ТЕМ -->
+            <div class="setting-block glass-panel">
+                <h3 data-key="set_theme">Цветовая тема (20 presets)</h3>
+                <div class="themes-grid" id="themes-container">
+                    <!-- Генерируется JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Данные книг и скрипты -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
